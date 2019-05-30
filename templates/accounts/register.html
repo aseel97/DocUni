@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Create an account{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <h1>عذراً</h1>
+        <p>لديك حساب بالفعل </p>
+
+    {% else %}
+        <h1>Create an account</h1>
+        <p>Please, sign up using the following form:</p>
+        <form action="" method="post">
+            {{ user_form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" value="Create my account"></p>
+        </form>
+    {% endif %}
+
+{% endblock %}

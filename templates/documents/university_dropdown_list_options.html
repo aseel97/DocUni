@@ -1,0 +1,4 @@
+<option value="">---------</option>
+{% for university in universities %}
+<option value="{{ university.pk }}">{{ university.name }}</option>
+{% endfor %}

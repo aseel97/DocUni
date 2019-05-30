@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from decouple import config
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,7 +26,7 @@ SECRET_KEY = 'jaib$moh*87ll$s4&vckjja=^b_@7g$4&k(sx@xcly0$ft+n(i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -35,14 +37,22 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'social_django',
+    'documents.apps.DocumentsConfig',
+    'rest_framework',
+    'whitenoise',
+    'hitcount',
+    'storages',
+    'crispy_forms',
 
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -55,7 +65,7 @@ ROOT_URLCONF = 'wara8z.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'accounts/templates')]
+        'DIRS': [os.path.join(BASE_DIR, 'templates/')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -115,19 +125,60 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
-LOGIN_REDIRECT_URL = 'dashboard'
+
+
+HTML_MINIFY = False
+
+JQUERY_URL = True
+
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+
+
+
+
+# AWS CONFIG
+
+AWS_ACCESS_KEY_ID = config('ACCESS_ID')
+AWS_SECRET_ACCESS_KEY = config('ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = config('BUCKET_NAME')
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = 'static'
+AWS_DEFAULT_ACL = None
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'wara8z.storage_backends.MediaStorage'
+
+
+#USERS CONFIG
+LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.facebook.FacebookOAuth2',
 ]
 
-SOCIAL_AUTH_FACEBOOK_KEY = '1379362802211227' # Facebook App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = 'c853d55f6ba42a2fde8665e54abf0b23' # Facebook App Secret
+SOCIAL_AUTH_FACEBOOK_KEY = '1379362802211227'  # Facebook App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = 'c853d55f6ba42a2fde8665e54abf0b23'  # Facebook App Secret
 
+
+
+
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'documents/static'),
+# ]
+
+# STATIC_URL = '/static/'
+# LOGIN_REDIRECT_URL = 'dashboard'
+
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

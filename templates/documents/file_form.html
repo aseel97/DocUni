@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <h2>File Form</h2>
+{#  <form method="post" id="fileForm" data-cities-url="{% url 'documents:ajax_load_universities' %}" enctype="multipart/form-data" novalidate>#}
+
+  <form method="post" id="fileForm" data-cities-url="{% url 'documents:ajax_load_universities' %}" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+    </table>
+    <button type="submit">Save</button>
+  </form>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#id_faculty").change(function () {
+      var url = '/ajax/load-courses';  // get the url of the `load_cities` view
+      var facultyId = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'faculty': facultyId       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_course").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+    $("#id_university").change(function () {
+      var url = '/ajax/load-faculties';  // get the url of the `load_cities` view
+      var universityId = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'university': universityId       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_faculty").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+
+  </script>
+
+{% endblock %}

@@ -1,0 +1,444 @@
+{#{% load staticfiles %}#}
+{% load static %}
+<!DOCTYPE html>
+<html dir="rtl" lang="en-US">
+<head>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="author" content="SemiColonWeb"/>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    {#    <script src="{% static 'js/jquery_lazyload/lazyload.js' %}"></script>#}
+    {#    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2/build/pdf.min.js"></script>#}
+    <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-beta.2/lazyload.min.js"></script>
+    <script src='{% static 'js/WebViewer/lib/webviewer.js' %}'></script>
+
+
+    <!-- Stylesheets============================================= -->
+    <link href="https://fonts.googleapis.com/css?family=Cairo|Changa|Markazi+Text|Tajawal:500,600" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i"
+          rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/bootstrap-rtl.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'style-rtl.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/swiper.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/dark.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/dark-rtl.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/font-icons.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/intro-fonts.css' %}" type="text/css"/>
+
+    <link rel="stylesheet" href="{% static 'css/font-icons-rtl.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css"/>
+
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/responsive-rtl.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/colors-rtl.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/colors.css' %}" type="text/css"/>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!-- Document Title
+    ============================================= -->
+    <title>RTL - Canvas | The Multi-Purpose HTML5 Template</title>
+
+</head>
+<body class="stretched rtl bg-light" data-gr-c-s-loaded="true" cz-shortcut-listen="true">
+
+<!-- Document Wrapper
+============================================= -->
+<div id="wrapper" class="clearfix">
+    <div id="top-bar" style="background-color: #3d3d3d;">
+
+        <div class="container clearfix">
+
+            <div class="col_half nobottommargin">
+
+                <!-- Top Links
+                ============================================= -->
+                <div class="top-links">
+                    <ul class="sf-js-enabled clearfix" style="touch-action: pan-y;">
+                        {#                        <li></li>#}
+                        <li style="color:white; "><img style="width:36px;height: 36px;"
+                                                       class="img-responsive img-circle "
+                                                       src="{{ request.user.profile.photo.url }}"/>أهلاً {{ request.user }}
+                        </li>
+                    </ul>
+                </div><!-- .top-links end -->
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <header id="header" class="">
+
+        <div id="header-wrap" class="">
+
+            <div class="container clearfix">
+
+                <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+                <!-- Logo
+                ============================================= -->
+                <div id="logo">
+                    <a href="{% url 'home' %}" class="standard-logo"
+                       data-dark-logo="{% static 'images/DUL.png' %}"
+                       data-sticky-logo="{% static 'images/DUL.png' %}"
+                       data-mobile-logo="{% static 'images/DUL.png' %}">
+                        <img
+                                src="{% static 'images/DUL.png' %}"
+                                alt="DocUni"></a>
+                    <a href="{% url 'home' %}" class="retina-logo"
+                       data-dark-logo="{% static 'images/DUL.png' %}"
+                       data-sticky-logo="{% static 'images/DUL.png' %}"
+                       data-mobile-logo="{% static 'images/DUL.png' %}"><img
+                            src="{% static 'images/DUL.png' %}"
+                            alt="DocUni"></a>
+                </div><!-- #logo end -->
+
+                <!-- Primary Navigation
+                ============================================= -->
+                <nav id="primary-menu" class="style-2">
+
+                    <ul class="sf-js-enabled" style="touch-action: pan-y;">
+                        <li class="sub-menu"><a href="{% url 'home' %}" class="sf-with-ul">
+                            <div>الرئيسية</div>
+                        </a></li>
+                        <li class="sub-menu"><a href="{% url 'documents:universities' %}" class="sf-with-ul">
+                            <div>الجامعات</div>
+                        </a></li>
+                        <li class="sub-menu"><a href="index.html" class="sf-with-ul">
+                            <div>سؤال وجواب</div>
+                        </a></li>
+                        <li class="sub-menu"><a href="index.html" class="sf-with-ul">
+                            <div>الكليات</div>
+                        </a></li>
+
+                        {% if user.is_authenticated %}
+                            <li class="sub-menu"><a href="#" class="sf-with-ul">
+                                <div>إضافة</div>
+                            </a>
+                                <ul style="display: none;">
+                                    <li><a href="{% url 'documents:file_add' %}">
+                                        <div>إضافة ملف</div>
+                                    </a></li>
+                                    {% if request.user.is_superuser %}
+
+                                        <li><a href="{% url 'documents:course_add' %}">
+                                            <div>إضافة مادة</div>
+                                        </a>
+                                        </li>
+                                        <li><a href="{% url 'documents:faculty_add' %}">
+                                            <div>إضافة كلية</div>
+                                        </a></li>
+                                        <li><a href="#">
+                                            <div>إضافة جامعة</div>
+                                        </a></li>
+
+                                    {% endif %}
+
+
+                                </ul>
+                            </li>
+                            <li class="sub-menu"><a href="#" class="sf-with-ul">
+                                <div>حسابي</div>
+                            </a>
+                                <ul style="display: none;">
+                                    <li><a href="{% url 'edit' %}">
+                                        <div>تعديل ملفي</div>
+                                    </a></li>
+                                    <li><a href="{% url 'password_change' %}">
+                                        <div>تعديل حسابي</div>
+                                    </a></li>
+
+                                    <li><a href="{% url 'logout' %}">
+                                        <div>تسجيل الخروج</div>
+                                    </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li class="sub-menu"><a href="{% url 'login' %}" class="sf-with-ul">
+                                <div>تسجيل الدخول</div>
+                            </a></li>
+
+
+                        {% endif %}
+                    </ul>
+
+                </nav><!-- #primary-menu end -->
+
+            </div>
+
+        </div>
+
+    </header>
+
+    {% block content %}
+
+    {% endblock content %}
+    <script>
+        $(document).ready(function () {
+
+
+                function updateText(btn, newCount, verb) {
+
+                    if (verb === "like") {
+                        {#newCount = newCount + 1;#}
+                        btn.text(newCount + "unlike" )
+
+
+                    } else {
+
+                        {#newCount = newCount - 1;#}
+                        btn.text(newCount + "like")
+
+                    }
+
+
+                }
+
+                $(".like-btn").click(function (e) {
+                    e.preventDefault()
+                    var this_ = $(this)
+
+                    var likeUrl = this_.attr("data-href")
+
+                    var likesCount = parseInt(this_.attr("data-likes"))
+
+
+                    $.ajax({
+                        url: likeUrl,
+                        method: "GET",
+                        data: {},
+                        success: function (data) {
+
+                            if (data.liked) {
+                                updateText(this_, data.likescount, "unlike")
+                            } else {
+                                updateText(this_, data.likescount, "like")
+                            }
+
+                        }, error: function (error) {
+                            console.log(error)
+                            console.log("error")
+                        }
+                    })
+                })
+
+            }
+        )
+
+    </script>
+
+
+    <!-- Footer
+    ============================================= -->
+    <footer id="footer" class="dark">
+
+        <div class="container">
+
+            <!-- Footer Widgets
+            ============================================= -->
+            <div class="footer-widgets-wrap clearfix">
+
+                <div class="col_two_third">
+
+                    <div class="col_one_third">
+
+                        <div class="widget clearfix">
+
+                            <img src="{% static 'images/DUL.png' %}" alt="" class="footer-logo">
+
+                            <p class="text-justify"><strong>DocUni</strong> هي اكبر منصة إلكترونية تجمع كل ما يحتاج طلاب
+                                الجامعات الاردنية من ملخصات واسئلة سنوات
+                                , كما توفر منصة DocUni امكانية طرح الاسئلة على مجتمع DocUni و التواصل بين طلاب الجامعات لخلق
+                                بيئة تعليمية متنوعة للطالب.
+
+                            </p>
+
+                            {#                            <div style="background: red  no-repeat center center; background-size: 100%;">#}
+                            {#                                <address>#}
+                            {#                                    <strong>Headquarters:</strong><br>#}
+                            {#                                    795 Folsom Ave, Suite 600<br>#}
+                            {#                                    San Francisco, CA 94107<br>#}
+                            {#                                </address>#}
+                            {#                                <abbr title="Phone Number"><strong>Phone:</strong></abbr> (91) 8547 632521<br>#}
+                            {#                                <abbr title="Fax"><strong>Fax:</strong></abbr> (91) 11 4752 1433<br>#}
+                            {#                                <abbr title="Email Address"><strong>Email:</strong></abbr> info@canvas.com#}
+                            {#                            </div>#}
+
+                        </div>
+
+                    </div>
+
+                    <div class="col_one_third">
+
+                        <div class="widget widget_links clearfix">
+
+                            <div class="h5">عن DocUni</div>
+
+                            <ul>
+                                <li><a href="http://codex.wordpress.org/">من نحن؟</a></li>
+                                <li><a href="http://wordpress.org/support/forum/requests-and-feedback">تطوع</a></li>
+                                <li><a href="http://wordpress.org/extend/plugins/">سياسة الخصوصية</a></li>
+                                <li><a href="http://wordpress.org/support/">إتفاقية الإستخدام</a></li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col_one_third col_last">
+
+                        <div class="widget clearfix">
+                            <div class="h5">الجامعات</div>
+
+                            <div id="post-list-footer">
+                                <ul>
+                                    {% for university in university_list %}
+                                        <div class="spost clearfix">
+                                            <div class="entry-c">
+                                                <div class="entry-title">
+                                                    <li><a href="
+                                                        {% url 'documents:university-detail'  university.pk %}">{{ university.name }}</a>
+                                                    </li>
+                                                </div>
+                                                {#                                            <ul class="entry-meta">#}
+                                                {#                                                <li>10th July 2014</li>#}
+                                                {#                                            </ul>#}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col_one_third col_last">
+
+                    <div class="widget widget_links clearfix">
+
+                        <div class="h5">التواصل</div>
+
+                        <ul>
+                            <li><a href="http://codex.wordpress.org/">التسجيل</a></li>
+                            <li><a href="http://wordpress.org/support/forum/requests-and-feedback">تسجيل الدخول</a></li>
+                            <li><a href="http://wordpress.org/extend/plugins/">المساعدة والدعم</a></li>
+                            <li><a href="http://wordpress.org/support/">الأسئلة المتكررة</a></li>
+                            <li><a href="http://wordpress.org/support/">الإتصال بنا</a></li>
+                            <li><a href="http://wordpress.org/support/">مدونة ورق</a></li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+
+            </div><!-- .footer-widgets-wrap end -->
+
+        </div>
+
+        <!-- Copyrights
+        ============================================= -->
+        <div id="copyrights">
+
+            <div class="container clearfix">
+
+                <div class="col_half">
+                    جميع الحقوق محفوظة © 2019 DocUni
+                    <br>
+                    <div class="copyright-links"><a href="#">إتفاقية الإستخدام</a> / <a href="#">سياسية الخصوصية</a>
+                    </div>
+                </div>
+
+                <div class="col_half col_last tright">
+                    <div class="fright clearfix">
+                        <a href="#" class="social-icon si-small si-borderless si-facebook">
+                            <i class="icon-facebook"></i>
+                            <i class="icon-facebook"></i>
+                        </a>
+
+                        <a href="#" class="social-icon si-small si-borderless si-twitter">
+                            <i class="icon-twitter"></i>
+                            <i class="icon-twitter"></i>
+                        </a>
+
+                        <a href="#" class="social-icon si-small si-borderless si-gplus">
+                            <i class="icon-gplus"></i>
+                            <i class="icon-gplus"></i>
+                        </a>
+
+                        <a href="#" class="social-icon si-small si-borderless si-pinterest">
+                            <i class="icon-pinterest"></i>
+                            <i class="icon-pinterest"></i>
+                        </a>
+
+                        <a href="#" class="social-icon si-small si-borderless si-vimeo">
+                            <i class="icon-vimeo"></i>
+                            <i class="icon-vimeo"></i>
+                        </a>
+
+                        <a href="#" class="social-icon si-small si-borderless si-github">
+                            <i class="icon-github"></i>
+                            <i class="icon-github"></i>
+                        </a>
+
+                        <a href="#" class="social-icon si-small si-borderless si-yahoo">
+                            <i class="icon-yahoo"></i>
+                            <i class="icon-yahoo"></i>
+                        </a>
+
+                        <a href="#" class="social-icon si-small si-borderless si-linkedin">
+                            <i class="icon-linkedin"></i>
+                            <i class="icon-linkedin"></i>
+                        </a>
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <i class="icon-envelope2"></i> info@DocUni.com <span class="middot">&middot;</span> <i
+                        class="icon-headphones"></i> +962-78-811-550 <span class="middot">&middot;</span> <i
+                        class="icon-skype2"></i> DocUni
+                </div>
+
+            </div>
+
+        </div><!-- #copyrights end -->
+
+    </footer><!-- #footer end -->
+
+</div><!-- #wrapper end -->
+
+<!-- Go To Top
+============================================= -->
+<div id="gotoTop" class="icon-angle-up"></div>
+<script>
+
+</script>
+<!-- External JavaScripts
+============================================= -->
+{#<script src="{% static 'js/jquery.js' %}"></script>#}
+<script src="{% static 'js/plugins.js' %}"></script>
+
+
+<!-- Footer Scripts
+============================================= -->
+<script src="{% static 'js/functions.js' %}"></script>
+
+
+</body>
+</html>

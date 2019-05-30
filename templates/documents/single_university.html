@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {#    <h1>الكليات الموجودة في {{ object.name }}</h1>#}
+    {#    <div id="portfolio" class="portfolio grid-container clearfix">#}
+    {#        {% for faculty in faculties %}#}
+    {#            <a href="{% url 'faculty-detail'  faculty.university.pk faculty.pk %}">{{ faculty.name }}</a><br>#}
+    {#            <article class="portfolio-item pf-media pf-icons">#}
+    {##}
+    {#            <!-- Portfolio Image -->#}
+    {#            <div class="portfolio-image">#}
+    {#                <a href="">#}
+    {#                    <img src="{{ faculty.thumbnail_gen }}" alt="Portfolio Title">#}
+    {#                </a>#}
+    {#                <div class="portfolio-overlay">#}
+    {#                    <a href="images/portfolio/full/1.jpg" class="left-icon" data-lightbox="image"><i#}
+    {#                            class="icon-line-plus"></i></a>#}
+    {#                    <a href="portfolio-single.html" class="right-icon"><i class="icon-line-ellipsis"></i></a>#}
+    {#                </div>#}
+    {#            </div>#}
+    {##}
+    {#            <!-- Portfolio Description -->#}
+    {#            <div class="portfolio-desc">#}
+    {#                <p class="h2 text-center"><a href="{% url 'faculty-detail' object.pk faculty.pk %}">{{ faculty.name }}</a></p>#}
+    {#                <span><a href="#">Media</a>, <a href="#">Icons</a></span>#}
+    {#            </div>#}
+    {##}
+    {#        </article>#}
+    {#        {% endfor %}#}
+
+
+
+    {#    </div>#}
+
+
+    <div class="container">
+        <div class="nav-scroller bg-white shadow-sm ">
+            <nav class="nav nav-underline justify-content-around ">
+                {#            <a class="nav-link active" href="#" style="font-family: 'Cairo Light', serif; "></a>#}
+                {#            <a class="nav-link active" href="#" style="font-family: 'Cairo Light', serif; "></a>#}
+                <a class="nav-link active p-2 text-muted" href="#"
+                   style="font-family: 'Cairo Light', serif; ">{{ object }}</a>
+
+                <a class="nav-link p-2 text-muted" href="#" style="font-family: 'Cairo Light', serif; ">
+                    {{ object }}
+                    {#      <span class="badge badge-pill bg-light align-text-bottom">27</span>#}
+                </a>
+                {#            <a class="nav-link" href="#" style="font-family: 'Cairo Light', serif; ">{{ object }}</a>#}
+                {#    <a class="nav-link" href="#">Suggestions</a>#}
+                {#    <a class="nav-link" href="#">Link</a>#}
+                {#    <a class="nav-link" href="#">Link</a>#}
+                {#    <a class="nav-link" href="#">Link</a>#}
+                {#    <a class="nav-link" href="#">Link</a>#}
+                {#    <a class="nav-link" href="#">Link</a>#}
+            </nav>
+        </div>
+        <br>
+
+        <section id="content">
+
+            <div class="row mb-3">
+                {% for faculty in faculties %}
+                    <div class="col-md-4">
+                        <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm h-md-250 position-relative">
+                            <div class="col p-4 d-block flex-column position-static">
+                                {#                        <strong class="d-inline-block mb-2 text-primary">{{ course.name }}</strong>#}
+                                <h3 class="mb-0" style="font-family: 'Markazi Text', serif;">{{ faculty.name }}</h3>
+                                {#                        <div class="mb-1 text-muted">Nov 12</div>#}
+                                <p class="card-text mb-auto">E111</p>
+                                <a href="{% url 'documents:faculty-detail' object.pk faculty.pk %}"
+                                   style="   border: 1px #E0E0E0 solid;         font-family: 'Markazi Text', serif; "
+                                   class="button button-rounded button-reveal button-small button-white button-light tright"><i
+                                        class="icon-line-arrow-left"></i><span>تصفح المواد</span></a>
+
+                            </div>
+                            <div class="col-3 d-block d-lg-block">
+                                <br>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="" id="Capa_1" style="enable-background:new 0 0 377.64 377.64;" viewBox="0 0 377.64 377.64" x="0px" y="0px" width="64px" height="64px" xmlns:xml="http://www.w3.org/XML/1998/namespace" xml:space="preserve" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"><g><path class="active-path" fill="#6c757d" d="M 369.64 347.132 H 8 c -4.418 0 -8 -3.582 -8 -8 s 3.582 -8 8 -8 h 361.64 c 4.418 0 8 3.582 8 8 S 374.058 347.132 369.64 347.132 Z M 354.968 310.669 c -4.418 0 -8 -3.582 -8 -8 V 125.884 h -53.882 c -4.418 0 -8 -3.582 -8 -8 s 3.582 -8 8 -8 h 61.884 c 4.418 0 8 3.582 8 8 c 0 0.059 0 0.118 -0.002 0.176 v 184.609 C 362.968 307.087 359.387 310.669 354.968 310.669 Z M 285.566 310.669 c -4.418 0 -8 -3.582 -8 -8 v -90.367 c 0 -4.418 3.582 -8 8 -8 s 8 3.582 8 8 v 90.367 C 293.566 307.087 289.984 310.669 285.566 310.669 Z M 221.069 310.669 c -4.418 0 -8 -3.582 -8 -8 v -90.367 c 0 -4.418 3.582 -8 8 -8 s 8 3.582 8 8 v 90.367 C 229.069 307.087 225.487 310.669 221.069 310.669 Z M 156.572 310.669 c -4.418 0 -8 -3.582 -8 -8 v -90.367 c 0 -4.418 3.582 -8 8 -8 s 8 3.582 8 8 v 90.367 C 164.572 307.087 160.99 310.669 156.572 310.669 Z M 92.075 310.669 c -4.418 0 -8 -3.582 -8 -8 v -90.367 c 0 -4.418 3.582 -8 8 -8 s 8 3.582 8 8 v 90.367 C 100.075 307.087 96.493 310.669 92.075 310.669 Z M 22.673 310.669 c -4.418 0 -8 -3.582 -8 -8 V 118.118 c -0.002 -0.078 -0.003 -0.156 -0.003 -0.234 c 0 -4.418 3.582 -8 8 -8 h 61.886 c 4.418 0 8 3.582 8 8 s -3.582 8 -8 8 H 30.673 v 176.785 C 30.673 307.087 27.091 310.669 22.673 310.669 Z M 321.05 235.857 c -4.418 0 -8 -3.582 -8 -8 v -15.555 c 0 -4.418 3.582 -8 8 -8 s 8 3.582 8 8 v 15.555 C 329.05 232.276 325.468 235.857 321.05 235.857 Z M 56.604 235.857 c -4.418 0 -8 -3.582 -8 -8 v -15.555 c 0 -4.418 3.582 -8 8 -8 s 8 3.582 8 8 v 15.555 C 64.604 232.276 61.023 235.857 56.604 235.857 Z M 321.05 187.071 c -4.418 0 -8 -3.582 -8 -8 v -15.555 c 0 -4.418 3.582 -8 8 -8 s 8 3.582 8 8 v 15.555 C 329.05 183.489 325.468 187.071 321.05 187.071 Z M 56.604 187.071 c -4.418 0 -8 -3.582 -8 -8 v -15.555 c 0 -4.418 3.582 -8 8 -8 s 8 3.582 8 8 v 15.555 C 64.604 183.489 61.023 187.071 56.604 187.071 Z M 285.566 187.069 H 92.075 c -4.418 0 -8 -3.582 -8 -8 s 3.582 -8 8 -8 h 193.492 c 4.418 0 8 3.582 8 8 S 289.985 187.069 285.566 187.069 Z M 285.562 159.805 c -1.193 0 -2.404 -0.268 -3.546 -0.833 l -94.058 -46.601 l -92.28 46.575 c -3.945 1.989 -8.755 0.407 -10.747 -3.538 c -1.991 -3.944 -0.407 -8.756 3.538 -10.747 l 92.351 -46.61 V 38.507 c 0 -4.418 3.582 -8 8 -8 h 57.83 c 4.418 0 8 3.582 8 8 v 30.224 c 0 4.418 -3.582 8 -8 8 h -49.83 v 22.174 l 92.299 45.729 c 3.959 1.961 5.578 6.761 3.617 10.72 C 291.34 158.172 288.506 159.805 285.562 159.805 Z M 196.82 60.731 h 41.83 V 46.507 h -41.83 V 60.731 Z" data-old_color="#f0f0f0" data-original="#000000" /></g> </svg>
+
+
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+            <hr>
+            {#<p><a href="{% url 'post_edit' post.pk %}">+ Edit Blog Post</a></p>#}
+            {#<br>#}
+            {#<p><a href="{% url 'post_delete' post.pk %}">+ Delete Blog Post</a></p>#}
+        </section>
+    </div>
+
+
+
+
+
+
+    {#<p><a href="{% url 'post_edit' post.pk %}">+ Edit Blog Post</a></p>#}
+    {#<br>#}
+    {#<p><a href="{% url 'post_delete' post.pk %}">+ Delete Blog Post</a></p>#}
+
+{% endblock content %}

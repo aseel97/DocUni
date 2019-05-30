@@ -1,0 +1,286 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+    <!-- Page Title
+		============================================= -->
+    <section id="page-title">
+
+        <div id="top" class="container clearfix">
+            <div class="col_full">
+                <ol class="breadcrumb ">
+                    <li class="breadcrumb-item h5"><a
+                            href="{% url 'documents:university-detail' file.university.pk %}">{{ file.university }}</a>
+                    </li>
+                    <li class="breadcrumb-item h5"><a
+                            href="{% url 'documents:faculty-detail' file.university.pk file.faculty.pk %}">{{ file.faculty }}</a>
+                    </li>
+
+                    <li class="breadcrumb-item active h5" aria-current="page">{{ file.course }}</li>
+                </ol>
+            </div>
+
+            <div class="col_one_fourth"><a href="#">
+                                <img alt="100%x180" src="{{ file.imgs.pop }}" class="img-thumbnail "
+                style="height: 350px; width: 100%; display: block;">
+            </a></div>
+            <div class="col_three_fourth col_last">
+                <h2 class="h2">{{ file.pdf.name }}</h2>
+
+                <p>Likes: <a class="like-btn" data-href="{{ file.get_api_like_url }}"
+                             data-likes="{{ file.likes.count }}"
+                             href='{{ file.get_like_url }}'>{{ file.likes.count }}
+                    {% if user in file.likes.all %}
+                        Unlike
+                    {% else %}
+                        Like
+                    {% endif %}
+                </a></p>
+
+
+                <p class="h5">{{ file.faculty }}->{{ file.course }}</p>
+                <p class="h5">{{ file.created_at_date.day }}-{{ file.created_at_date.month }}-{{ file.created_at_date.year }}</p>
+
+                <hr>
+                {#                <p class="h5">{{ file.size_cal }}MB#}
+                {#                    | <i class="green fas fa-copy"> صفحات {{ file.images_number }}  </i> #}
+                {#                    | <i#}
+                {#                            class="green fas fa-eye">{{ hitcount.total_hits }}</i></p>#}
+
+
+            </div>
+
+        </div>
+
+    </section><!-- #page-title end -->
+
+    <!-- Content
+    ============================================= -->
+
+
+    <section id="content">
+
+        <div class="content-wrap">
+
+            <div class="container clearfix">
+
+                <div class="col_full ">
+                    {#                    <embed src="https://drive.google.com/viewerng/#}
+                    {#viewer?embedded=true&url={{ file.pdf.url }}" width="500" height="375">#}
+                    {##}
+                    {#                    <file data="{{ file.pdf.url }}" type="application/pdf">#}
+                    {#                        <embed src="{{ file.pdf.url }}" type="application/pdf"/>#}
+                    {#                    </file>#}
+
+
+                    {#<div  data-big="1" data-lightbox="gallery" style="margin-right: -1px; position: relative; height: 513.75px;">#}
+                    {% for img in file.imgs %}
+                        <img data-src="{{ img }}" class="page img-fluid lazyload "
+                             alt="{{ file.pdf.name }}" align="center" style=" width: 100%;">
+
+                        {#                                            <a href="{{ img }}" data-lightbox="gallery-item"#}
+                        {#                                               style="width: 228px; position: absolute; left: 912px; top: 0px;"><img class="page image_fade lazyload"#}
+                        {#                                                                                                                     data-src="{{ img }}"#}
+                        {#                                                                                                                     alt="{{ file.pdf.name }}"#}
+                        {#                                                                                                                     style="opacity: 1;"></a>#}
+                    {% endfor %}
+                    {#                        <iframe src="https://docs.google.com/gview?url={{ file.pdf.url }}&embedded=true"#}
+                    {#                                style="width:100%; height:1000px;" frameborder="0"></iframe>#}
+                    {#                        <script>#}
+                    {#                            $(document).load(function () {#}
+                    {#                                $(".ndfHFb-c4YZDc-Bz112c.ndfHFb-c4YZDc-DH6Rkf-Bz112c").css('display', 'none');#}
+                    {#                            });#}
+                    {##}
+                    {##}
+                    {#                        </script>#}
+
+
+                </div>
+                <hr>
+                <p id="end" class="h5 text-center"></p>
+
+                <a class="txt" href="#" id="loadMore">تحميل المزيد</a>
+
+                <p class="totop ">
+                    <a class="txt" href="#top">Back to top</a>
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+        </div>
+
+    </section><!-- #content end -->
+
+    {#    <p>{{ file.text_extractor }}</p>#}
+
+    {% if user.is_authenticated %}
+
+        {% with comments.count as total_comments %}
+            <h2>
+                {{ total_comments }} comment{{ total_comments|pluralize }}
+            </h2>
+        {% endwith %}
+        {% for comment in comments %}
+            <div class="comment">
+                <p class="info">
+                    تعليق {{ forloop.counter }} بواسطة {{ comment.user }}
+                    {{ comment.created }}<img style="width:36px;height: 36px;"
+                                              class="img-responsive img-circle "
+                                              src="{{ comment.user.profile.photo.url }}"/>
+                </p>
+
+                {{ comment.body|linebreaks }}
+            </div>
+        {% empty %}
+            <p>There are no comments yet.</p>
+        {% endfor %}
+        {% if new_comment %}
+            <h2>Your comment has been added.</h2>
+        {% else %}
+            <h2>Add a new comment</h2>
+            <form action="." method="post">
+                {{ comment_form.as_p }}
+                {% csrf_token %}
+                <p><input type="submit" value="Add comment"></p>
+            </form>
+        {% endif %}
+    {% else %}
+        <p>يجب عليك <a href="{% url "login" %}">تسجيل الدخول</a> قبل ترك اي تعليق على هذا الملف</p>
+    {% endif %}
+    <hr>
+
+    <style>
+
+        #end {
+            font-family: "Cairo";
+            color: #c0392b;
+        }
+
+        .green {
+            color: #6cb76a;
+        }
+
+        img.page {
+            display: none;
+            padding: 10px;
+            border-width: 0 1px 1px 0;
+            border-style: solid;
+            border-color: #fff;
+            box-shadow: 0 1px 1px #ccc;
+            margin-bottom: 15px;
+            background-color: #f1f1f1;
+
+        }
+
+        .totop {
+            position: fixed;
+            bottom: 10px;
+            right: 20px;
+        }
+
+        .totop a {
+            display: none;
+        }
+
+        a.txt, a.txt:visited {
+            color: #33739E;
+            text-decoration: none;
+            display: block;
+            margin: 10px 0;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        #loadMore {
+            padding: 10px;
+            font-size: 20px;
+            text-align: center;
+            background-color: lightseagreen;
+            font-family: "Cairo Light";
+            color: #fff;
+            border-width: 0 1px 1px 0;
+            border-style: solid;
+            border-color: #fff;
+            box-shadow: 0 1px 1px #ccc;
+            transition: all 600ms ease-in-out;
+            -webkit-transition: all 600ms ease-in-out;
+            -moz-transition: all 600ms ease-in-out;
+            -o-transition: all 600ms ease-in-out;
+        }
+
+        #loadMore:hover {
+            background-color: #fff;
+            color: #33739E;
+        }
+    </style>
+
+
+
+
+    <script>
+
+
+        window.addEventListener("load", function (event) {
+            /* This is just to add random string after each url. Do not copy. */
+            /* Yes, you... Do not copy. */
+            let images = document.querySelectorAll("img.page");
+            images.forEach(image => {
+                let src = image.getAttribute("data-src");
+                image.setAttribute("data-src", src + "?" + Math.random());
+            });
+            lazyload(images);
+
+        });
+
+
+        $(document).ready(function () {
+
+            if ($("img.page").length <= 4) {
+                $("#loadMore").hide();
+            }
+        });
+
+        $(function () {
+            $("img.page").slice(0, 4).show();
+            $("#loadMore").on('click', function (e) {
+
+                e.preventDefault();
+                $("img.page:hidden").slice(0, 4).slideDown();
+
+                if ($("img.page:hidden").length == 0) {
+                    $("#loadMore").fadeOut('slow');
+                    $("#end").text("نهاية الملف")
+                }
+                //$('html,body').animate({
+                //  scrollTop: $(this).offset().top
+                //}, 5000);
+            });
+        });
+
+        $('a[href=#top]').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 600);
+            return false;
+        });
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 50) {
+                $('.totop a').fadeIn();
+            } else {
+                $('.totop a').fadeOut();
+            }
+        });
+
+    </script>
+{% endblock content %}
+
+

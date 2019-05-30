@@ -1,0 +1,313 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <main role="main" class="container">
+        <div class="jumbotron mt-3">
+            <h3>{{ object.name }}</h3>
+            <p class="mute">{{ object.university }} > {{ object.faculty }} > {{ object.name }}</p>
+            {#            <a class="btn btn-lg btn-primary" href="/docs/4.3/components/navbar/" role="button">View#}
+            {#                navbar docs »</a>#}
+        </div>
+
+        <div class="my-3 p-3 bg-white rounded shadow-sm">
+            {#            <h3 class="fntlight border-bottom border-gray pb-2 mb-0">الملفات</h3>#}
+            <div id="portfolio" class="portfolio grid-cointainer portfolio-3 portfolio-nomargin clearfix"
+                 data-layout=" fitRows">
+
+                {#                <div class="tabs clearfix" id="tabs">#}
+                {##}
+                {#                    <ul class="tab-nav clearfix">#}
+                {#                        <li><a href="#tab-3">جميع الملفات</a></li>#}
+                {##}
+                {#                        <li><a href="#tab-1">اسئلة سنوات</a></li>#}
+                {#                        <li><a href="#tab-2">ملخصات</a></li>#}
+                {##}
+                {#                    </ul>#}
+                {##}
+                {#                    <div class="tab-container">#}
+                {#                        <script>#}
+                {#                            $(document).ready(function () {#}
+                {#                                console.log("docuemtn ready");#}
+                {#                                {% for file in files %}#}
+                {#                                    $("#tab-3").append(`#}
+                {#                                                                  <div id="new"#}
+                {#                                                             class="media text-muted pt-3 border-bottom border-gray {{ file.category }}">#}
+                {#                                                            <img src="{{ file.imgs.pop }}" class=" img-thumbnail"#}
+                {#                                                                 style="height: 150px; width: 109px; border: 1px solid lightgray;margin-bottom: 10px;">#}
+                {#                                                            <div class="media-body pb-3 mb-0 small lh-125 ">#}
+                {#                                                                <div class="d-flex justify-content-between align-items-center w-100">#}
+                {#                                                                    <h5 class="fnt text-gray-dark" ><a style="color:#6c757d;"#}
+                {#                                                                            href="{% url 'file-detail' file.pk %}">{{ file.pdf.name }}</a>#}
+                {#                                                                    </h5>#}
+                {##}
+                {#                                                                </div>#}
+                {##}
+                {#                                                                <span class="d-block">{{ file.category.title }}</span>#}
+                {#                                                                <span class="d-block">{{ file.created_at_date.month }}-{{ file.created_at_date.year }}</span>#}
+                {#                                                                <span class="d-block">                                                                        <a href="{% url 'file-detail' file.pk %}">#}
+                {#<a href="#" class="button button-3d button-mini button-rounded button-teal">تصفح</a></span>#}
+                {##}
+                {#                                                            </div>#}
+                {##}
+                {#                                                        </div>#}
+                {##}
+                {##}
+                {##}
+                {#                                     `)#}
+                {#                                    {% if file.category == "أسئلة سنوات" %}#}
+                {##}
+                {#                                        $("#tab-1").append(`#}
+                {#                                                                                        <div id="new"#}
+                {#                                                             class="media text-muted pt-3 border-bottom border-gray {{ file.category }}">#}
+                {#                                                            <img src="{{ file.imgs.pop }}" class=" img-thumbnail"#}
+                {#                                                                 style="height: 150px; width: 109px; border: 1px solid lightgray;margin-bottom: 10px;">#}
+                {#                                                            <div class="media-body pb-3 mb-0 small lh-125 ">#}
+                {#                                                                <div class="d-flex justify-content-between align-items-center w-100">#}
+                {#                                                                    <h5 class="fnt text-gray-dark" ><a style="color:#6c757d;"#}
+                {#                                                                            href="{% url 'file-detail' file.pk %}">{{ file.pdf.name }}</a>#}
+                {#                                                                    </h5>#}
+                {##}
+                {#                                                                </div>#}
+                {##}
+                {#                                                                <span class="d-block">{{ file.category.title }}</span>#}
+                {#                                                                <span class="d-block">{{ file.created_at_date.month }}-{{ file.created_at_date.year }}</span>#}
+                {#                                                                <span class="d-block">                                                                        <a href="{% url 'file-detail' file.pk %}">#}
+                {#<a href="#" class="button button-3d button-mini button-rounded button-teal">تصفح</a></span>#}
+                {##}
+                {#                                                            </div>#}
+                {##}
+                {#                                                        </div>#}
+                {##}
+                {##}
+                {##}
+                {#                                `)#}
+                {##}
+                {#                                    {% elif  file.category == "ملخصات"%}#}
+                {#                                        $("#tab-2").append(`#}
+                {#<div id="new"#}
+                {#                                                             class="media text-muted pt-3 border-bottom border-gray {{ file.category }}">#}
+                {#                                                            <img src="{{ file.imgs.pop }}" class=" img-thumbnail"#}
+                {#                                                                 style="height: 150px; width: 109px; border: 1px solid lightgray;margin-bottom: 10px;">#}
+                {#                                                            <div class="media-body pb-3 mb-0 small lh-125 ">#}
+                {#                                                                <div class="d-flex justify-content-between align-items-center w-100">#}
+                {#                                                                    <h5 class="fnt text-gray-dark" ><a style="color:#6c757d;"#}
+                {#                                                                            href="{% url 'file-detail' file.pk %}">{{ file.pdf.name }}</a>#}
+                {#                                                                    </h5>#}
+                {##}
+                {#                                                                </div>#}
+                {##}
+                {#                                                                <span class="d-block">{{ file.category.title }}</span>#}
+                {#                                                                <span class="d-block">{{ file.created_at_date.month }}-{{ file.created_at_date.year }}</span>#}
+                {#                                                                <span class="d-block">                                                                        <a href="{% url 'file-detail' file.pk %}">#}
+                {#<a href="#" class="button button-3d button-mini button-rounded button-teal">تصفح</a></span>#}
+                {##}
+                {#                                                            </div>#}
+                {##}
+                {#                                                        </div>#}
+                {##}
+                {##}
+                {#                                        `)#}
+                {#                                    {% endif %}#}
+                {##}
+                {##}
+                {#                                {% endfor %}#}
+                {##}
+                {#                            })#}
+                {#                        </script>#}
+                {##}
+                {##}
+                {#                        <div class="tab-container">#}
+                {##}
+                {#                            <div class="tab-content clearfix" id="tab-1">#}
+                {##}
+                {#                            </div>#}
+                {#                            <div class="tab-content clearfix" id="tab-2">#}
+                {##}
+                {#                            </div>#}
+                {#                            <div class="tab-content clearfix" id="tab-3">#}
+                {##}
+                {#                            </div>#}
+                {##}
+                {#                        </div>#}
+                {##}
+                {##}
+                {#                    </div>#}
+                {##}
+                {#                </div>#}
+
+                <div class="row">
+                    <div class="col-4">
+                        <div class="list-group" id="list-tab" role="tablist">
+                            <a class="list-group-item list-group-item-action active" id="list-home-list"
+                               data-toggle="list" href="#list-1" role="tab" aria-controls="home"
+                               aria-selected="true">كل الملفات</a>
+                            <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list"
+                               href="#list-2" role="tab" aria-controls="profile" aria-selected="false">اسئلة
+                                سنوات</a>
+                            <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list"
+                               href="#list-3" role="tab" aria-controls="messages"
+                               aria-selected="false">ملخصات</a>
+                            <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list"
+                               href="#list-4" role="tab" aria-controls="settings" aria-selected="false">أخرى</a>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="tab-content" id="nav-tabContent">
+                            <script>
+                                $(document).ready(function () {
+                                    console.log("docuemtn ready");
+                                    {% for file in files %}
+                                        $("#list-1").append(`
+                                                                  <div id="new"
+                                                             class="media text-muted pt-3 border-bottom border-gray {{ file.category }}">
+                                                            <img src="{{ file.imgs.pop }}" class=" img-thumbnail"
+                                                                 style="height: 150px; width: 109px; border: 1px solid lightgray;margin-bottom: 10px;">
+                                                            <div class="media-body pb-3 mb-0 small lh-125 ">
+                                                                <div class="d-flex justify-content-between align-items-center w-100">
+                                                                    <h5 class="fnt text-gray-dark" ><a style="color:#6c757d;"
+                                                                            href="{% url 'documents:file-detail' file.pk %}">{{ file.pdf.name }}</a>
+                                                                    </h5>
+                                                                </div>
+
+                                                                <span class="d-block">{{ file.category.title }}</span>
+                                                                <span class="d-block">{{ file.created_at_date.month }}-{{ file.created_at_date.year }}</span>
+                                                                <span class="d-block">                                                                        <a href="{% url 'documents:file-detail' file.pk %}">
+<a href="{% url 'documents:file-detail' file.pk %}" class="button button-3d button-mini button-rounded button-teal">تصفح</a></span>
+
+                                                            </div>
+
+                                                        </div>
+
+
+
+                                     `)
+                                        {% if file.category == "أسئلة سنوات" %}
+
+                                            $("#list-2").append(`
+                                                                                        <div id="new"
+                                                             class="media text-muted pt-3 border-bottom border-gray {{ file.category }}">
+                                                            <img src="{{ file.imgs.pop }}" class=" img-thumbnail"
+                                                                 style="height: 150px; width: 109px; border: 1px solid lightgray;margin-bottom: 10px;">
+                                                            <div class="media-body pb-3 mb-0 small lh-125 ">
+                                                                <div class="d-flex justify-content-between align-items-center w-100">
+                                                                    <h5 class="fnt text-gray-dark" ><a style="color:#6c757d;"
+                                                                            href="{% url 'documents:file-detail' file.pk %}">{{ file.pdf.name }}</a>
+                                                                    </h5>
+
+                                                                </div>
+
+                                                                <span class="d-block">{{ file.category.title }}</span>
+                                                                <span class="d-block">{{ file.created_at_date.month }}-{{ file.created_at_date.year }}</span>
+                                                                <span class="d-block">                                                                        <a href="{% url 'documents:file-detail' file.pk %}">
+<a href="{% url 'documents:file-detail' file.pk %}" class="button button-3d button-mini button-rounded button-teal">تصفح</a></span>
+
+                                                            </div>
+
+                                                        </div>
+
+
+
+                                `)
+
+                                        {% elif  file.category == "ملخصات"%}
+                                            $("#list-3").append(`
+<div id="new"
+                                                             class="media text-muted pt-3 border-bottom border-gray {{ file.category }}">
+                                                            <img src="{{ file.imgs.pop }}" class=" img-thumbnail"
+                                                                 style="height: 150px; width: 109px; border: 1px solid lightgray;margin-bottom: 10px;">
+                                                            <div class="media-body pb-3 mb-0 small lh-125 ">
+                                                                <div class="d-flex justify-content-between align-items-center w-100">
+                                                                    <h5 class="fnt text-gray-dark" ><a style="color:#6c757d;"
+                                                                            href="{% url 'documents:file-detail' file.pk %}">{{ file.pdf.name }}</a>
+                                                                    </h5>
+
+                                                                </div>
+
+                                                                <span class="d-block">{{ file.category.title }}</span>
+                                                                <span class="d-block">{{ file.created_at_date.month }}-{{ file.created_at_date.year }}</span>
+                                                                <span class="d-block">                                                                        <a href="{% url 'documents:file-detail' file.pk %}">
+<a href="{% url 'documents:file-detail' file.pk %}" class="button button-3d button-mini button-rounded button-teal">تصفح</a></span>
+
+                                                            </div>
+
+                                                        </div>
+
+
+                                        `)
+                                        {% endif %}
+
+
+                                    {% endfor %}
+
+                                })
+                            </script>
+
+                            <div class="tab-pane fade active show" id="list-1" role="tabpanel"
+                                 aria-labelledby="list-home-list">
+
+                            </div>
+                            <div class="tab-pane fade" id="list-2" role="tabpanel"
+                                 aria-labelledby="list-profile-list">
+
+                            </div>
+                            <div class="tab-pane fade" id="list-3" role="tabpanel"
+                                 aria-labelledby="list-messages-list">
+
+                            </div>
+                            <div class="tab-pane fade" id="list-4" role="tabpanel"
+                                 aria-labelledby="list-settings-list">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            {#            <small class="d-block text-right mt-3">#}
+            {#                <a href="#">All suggestions</a>#}
+            {#            </small>#}
+        </div>
+    </main>
+
+
+    {#    <hr>#}
+
+    <style>
+        h3.fnt {
+            font-family: 'Markazi Text', serif;
+        }
+
+        .media-body {
+            margin: 15px;
+
+        }
+
+        h2.fnt {
+            font-family: 'Cairo', Serif;
+        }
+
+        .fntlight {
+            font-family: "Cairo Light", Serif;
+        }
+
+        .hdr {
+            background: #15aae5;
+        }
+
+        span.fnt {
+            font-family: 'Markazi Text', serif;
+            font-size: 16px;
+
+        }
+
+        .new {
+            position: relative !important;
+        }
+    </style>
+    <script>
+        $('#fil').click(function () {
+            $('#new').addClass('new');
+            console.log("hi")
+        });
+    </script>
+{% endblock content %}
