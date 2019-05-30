@@ -1,0 +1,1 @@
+web: gunicorn wara8z.wsgi
